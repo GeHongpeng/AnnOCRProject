@@ -6,16 +6,16 @@ import numpy as np
 def create_ann(layer_sizes):
     """ANNを生成する
 
-        ANNモデルのインスタンスを作成する
+    ANNモデルのインスタンスを作成する
 
-        パラメータ:
-            layer_sizes: ANNモデルのレイヤーサイズ
+    パラメータ:
+        layer_sizes: ANNモデルのレイヤーサイズ
 
-        戻り値:
-            ANNインスタンス
+     戻り値:
+        ANNインスタンス
 
-        例外:
-            なし
+    例外:
+        なし
     """
     # ANNインスタンスを生成する
     ann = cv2.ANN_MLP()
@@ -28,18 +28,18 @@ def create_ann(layer_sizes):
 def train(ann, train_data, train_resp):
     """学習を実施する
 
-            ANN方式で学習データを使って学習を実施する
+    ANN方式で学習データを使って学習を実施する
 
-            パラメータ:
-                ann: ANNモデルのインスタンス
-                train_data: 学習データ
-                train_resp: 学習データに対応する結果
+    パラメータ:
+        ann: ANNモデルのインスタンス
+        train_data: 学習データ
+        train_resp: 学習データに対応する結果
 
-            戻り値:
-                ANNインスタンス
+    戻り値:
+        ANNインスタンス
 
-            例外:
-                なし
+    例外:
+        なし
     """
     # Set criteria
     criteria = (cv2.TERM_CRITERIA_COUNT | cv2.TERM_CRITERIA_EPS, 500, 0.0001)
@@ -57,17 +57,17 @@ def train(ann, train_data, train_resp):
 def evaluate(ann, test_data):
     """評価を実施する
 
-            評価データを使って評価を実施する。評価用画像を表示し、予測結果を出力する
+    評価データを使って評価を実施する。評価用画像を表示し、予測結果を出力する
 
-            パラメータ:
-                ann: ANNモデルのインスタンス
-                test_data: 評価用データ
+    パラメータ:
+        ann: ANNモデルのインスタンス
+        test_data: 評価用データ
 
-            戻り値:
-                なし
+    戻り値:
+        なし
 
-            例外:
-                なし
+    例外:
+        なし
     """
     # サンプルデータを取得する
     sample_data = np.array(test_data[0][0].ravel(), dtype=np.float32)
@@ -83,17 +83,17 @@ def evaluate(ann, test_data):
 def predict(ann, sample_image):
     """予測を実施する
 
-            サンプルデータを使って予測を実施する。予測結果を出力する
+    サンプルデータを使って予測を実施する。予測結果を出力する
 
-            パラメータ:
-                ann: ANNモデルのインスタンス
-                test_data: 評価用データ
+    パラメータ:
+        ann: ANNモデルのインスタンス
+        test_data: 評価用データ
 
-            戻り値:
-                なし
+    戻り値:
+        なし
 
-            例外:
-                なし
+    例外:
+        なし
     """
     # 対象画像を取得する
     target_image = sample_image.copy()
