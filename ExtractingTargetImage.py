@@ -174,3 +174,4 @@ cv2.imwrite('./testdata/sample/result.jpg', img)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
