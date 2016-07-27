@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71f555a5-7673-46de-a9e3-5c0389c75065" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ContoursProcessingLibrary.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ANNWrapperLibrary.py" afterPath="$PROJECT_DIR$/ANNWrapperLibrary.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ExtractingTargetImage.py" afterPath="$PROJECT_DIR$/ExtractingTargetImage.py" />
     </list>
     <ignored path="AnnOCRProject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,8 +49,8 @@
       <file leaf-file-name="ContoursProcessingLibrary.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ContoursProcessingLibrary.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="202" column="26" selection-start-line="202" selection-start-column="26" selection-end-line="202" selection-end-column="26" />
+            <state relative-caret-position="229">
+              <caret line="195" column="39" selection-start-line="195" selection-start-column="39" selection-end-line="195" selection-end-column="39" />
               <folding>
                 <element signature="e#25#35#0" expanded="true" />
               </folding>
@@ -352,7 +349,14 @@
       <option name="project" value="LOCAL" />
       <updated>1469589216727</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="modify">
+      <created>1469598307351</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1469598307351</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -449,8 +453,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ContoursProcessingLibrary.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="202" column="26" selection-start-line="202" selection-start-column="26" selection-end-line="202" selection-end-column="26" />
+        <state relative-caret-position="229">
+          <caret line="195" column="39" selection-start-line="195" selection-start-column="39" selection-end-line="195" selection-end-column="39" />
           <folding>
             <element signature="e#25#35#0" expanded="true" />
           </folding>
