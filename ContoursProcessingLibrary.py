@@ -47,6 +47,7 @@ def inside_x_axis(r1, r2):
     # 座標情報を取得する
     r1_x1, r1_y1, r1_w1, r1_h1 = r1
     r2_x2, r2_y2, r2_w2, r2_h2 = r2
+
     # 判別結果を返す
     # if ((r1_x1 < r2_x2) and (r1_x1+r1_w1 > r2_x2))
     #        or ((r1_x1 < r2_x2+r2_w2) and (r1_x1+r1_w1 > r2_x2+r2_w2))
@@ -54,6 +55,19 @@ def inside_x_axis(r1, r2):
     if ((r1_x1 <= r2_x2) and (r1_x1+r1_w1 >= r2_x2)) \
             or ((r1_x1 <= r2_x2+r2_w2) and (r1_x1+r1_w1 >= r2_x2+r2_w2)) \
             or ((r1_x1 > r2_x2) and (r1_x1+r1_w1 < r2_x2+r2_w2)):
+
+        len = 0
+        if (r1_y1 + r1_h1 < r2_y2 + r2_h2) and (r1_y1 + r1_h1 < r2_y2):
+            len = r2_y2 - (r1_y1 + r1_h1)
+            print len
+            if len > 2:
+                return False
+        elif (r1_y1 + r1_h1 > r2_y2 + r2_h2) and (r1_y1 > r2_y2 + r2_h2):
+            len = r1_y1 - (r2_y2 + r2_h2)
+            print len
+            if len > 2:
+                return False
+
         return True
     else:
         return False
@@ -110,9 +124,12 @@ def find_contours(img):
     # ガウシアンフィルタを用いて画像の平滑化を行う
     bw = cv2.GaussianBlur(bw, (3, 3), 0)
     # 二値化を行う
-    ret, thbw = cv2.threshold(bw, 215, 255, cv2.THRESH_BINARY_INV)
+    ret, thbw = cv2.threshold(bw, 230, 255, cv2.THRESH_BINARY_INV) # 印鑑: 195(二値化) 3×3(ガウシアン)  手書き: 230(二値化) 11×11(ガウシアン)
     # 収縮処理を行う
     thbw = cv2.erode(thbw, np.ones((2, 2), np.uint8), iterations=2)
+
+    #cv2.imshow('thbw', thbw)
+    #cv2.imwrite('./testdata/sample/result2.jpg', thbw)
 
     # 輪郭を検出する
     contours, hierarchy = cv2.findContours(thbw.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -156,11 +173,9 @@ def exclude_inadequacy_contours(img, contours):
                 break
         # 既存の長方形に含まれていない場合
         if not is_inside:
-            # print a
-            #cv2.rectangle(img, (c_x, c_y), (c_x + c_w, c_y + c_h), (255, 0, 0), 1)
             #
-            if not a == b:
-            #if (not a == b) and (a > contour_area_Threshold):
+            #if not a == b:
+            if (not a == b) and (a > contour_area_Threshold):
                 #
                 target_r = r
                 for i, q in enumerate(rectangles):

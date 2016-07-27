@@ -6,7 +6,7 @@ import ContoursProcessingLibrary as cpl
 
 
 # カラー画像を読み込む
-img = cv2.imread('./testdata/sample/sample6.jpg', cv2.IMREAD_COLOR)
+img = cv2.imread('./testdata/sample/type3/sample40.jpeg', cv2.IMREAD_COLOR)
 
 # 輪郭を算出する
 contours = cpl.find_contours(img)
