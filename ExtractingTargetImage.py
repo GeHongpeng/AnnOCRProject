@@ -4,52 +4,95 @@ import numpy as np
 import glob
 from random import randint
 
-"""
-r1の四角形はr2の四角形に入るかどうかを判別する
-"""
-def insideArea(r1, r2):
-    x1, y1, w1, h1 = r1
-    x2, y2, w2, h2 = r2
 
-    if (x1 >= x2) and (y1 >= y2) and (x1 + w1 <= x2 + w2) and (y1 + h1 <= y2 + h2):
+def inside_area(r1, r2):
+    """r1の四角形はr2の四角形に入るかどうかを判別する
+
+    r1の四角形はr2の四角形に入るかどうかを判別する
+
+    パラメータ:
+        r1: 判別対象四角形
+        r2: 判別される対象四角形
+
+    戻り値:
+        True/False
+
+    例外:
+        なし
+    """
+    # 座標情報を取得する
+    r1_x1, r1_y1, r1_w1, r1_h1 = r1
+    r2_x2, r2_y2, r2_w2, r2_h2 = r2
+    # 判別結果を返す
+    if (r1_x1 >= r2_x2) and (r1_y1 >= r2_y2) and (r1_x1 + r1_w1 <= r2_x2 + r2_w2) and (r1_y1 + r1_h1 <= r2_y2 + r2_h2):
         return True
     else:
         return False
 
-"""
-X軸を重なっているかどうかを判別する
-"""
-def insideXLine(r1, r2):
-    x1, y1, w1, h1 = r1
-    x2, y2, w2, h2 = r2
 
-    #if ((x1 < x2) and (x1 + w1 > x2)) or ((x1 < x2 + w2) and (x1 + w1 > x2 + w2)) or ((x1 > x2) and (x1 + w1 < x2 + w2)):
-    if ((x1 <= x2) and (x1+w1 >= x2)) or ((x1 <= x2+w2) and (x1+w1 >= x2+w2)) or ((x1 > x2) and (x1+w1 < x2+w2)):
+def inside_x_axis(r1, r2):
+    """X軸を重なっているかどうかを判別する
+
+    X軸を重なっているかどうかを判別する
+
+    パラメータ:
+        r1: 判別対象四角形
+        r2: 判別される対象四角形
+
+    戻り値:
+        True/False
+
+    例外:
+        なし
+    """
+    # 座標情報を取得する
+    r1_x1, r1_y1, r1_w1, r1_h1 = r1
+    r2_x2, r2_y2, r2_w2, r2_h2 = r2
+    # 判別結果を返す
+    # if ((r1_x1 < r2_x2) and (r1_x1+r1_w1 > r2_x2))
+    #        or ((r1_x1 < r2_x2+r2_w2) and (r1_x1+r1_w1 > r2_x2+r2_w2))
+    #        or ((r1_x1 > r2_x2) and (r1_x1+r1_w1 < r2_x2 + r2_w2)):
+    if ((r1_x1 <= r2_x2) and (r1_x1+r1_w1 >= r2_x2)) \
+            or ((r1_x1 <= r2_x2+r2_w2) and (r1_x1+r1_w1 >= r2_x2+r2_w2)) \
+            or ((r1_x1 > r2_x2) and (r1_x1+r1_w1 < r2_x2+r2_w2)):
         return True
     else:
         return False
 
-"""
-対象文字が含まれた正方形を取得
-"""
+
 def wrap_character(rect):
+    """対象文字が含まれた正方形を算出する
+
+    対象文字が含まれた正方形を算出する
+
+    パラメータ:
+        rect: 判別対象四角形
+
+    戻り値:
+        正方形の座標情報
+
+    例外:
+        なし
+    """
+    # 座標情報を取得する
     rect_x, rect_y, rect_w, rect_h = rect
+    # パディング値を設定する
     padding = 1
+    # 重心点を算出する
     hcenter = rect_x + rect_w/2
     vcenter = rect_y + rect_h/2
-
+    # 正方形を算出する
     if rect_h > rect_w:
         rect_w = rect_h
         rect_x = hcenter - (rect_w/2)
     else:
         rect_h = rect_w
         rect_y = vcenter - (rect_h/2)
-
+    # パディングに加えた正方形を返す
     return rect_x-padding, rect_y-padding, rect_w+padding, rect_h+padding
 
-"""
-画像を読み込む
-"""
+
+# 画像を読み込む
 img = cv2.imread('./testdata/sample/sample8.jpg', 1)
 
 
@@ -90,7 +133,7 @@ for c in cntrs:
     is_inside = False
     #
     for q in rectangles:
-        if insideArea(r, q):
+        if inside_area(r, q):
             is_inside = True
             break
     #
@@ -102,7 +145,7 @@ for c in cntrs:
             #
             target_r = r
             for i, q in enumerate(rectangles):
-                if insideXLine(target_r, q):
+                if inside_x_axis(target_r, q):
                     #
                     target_x = 0
                     target_y = 0
@@ -174,4 +217,3 @@ cv2.imwrite('./testdata/sample/result.jpg', img)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
