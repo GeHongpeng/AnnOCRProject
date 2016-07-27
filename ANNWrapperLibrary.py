@@ -104,3 +104,4 @@ def predict(ann, sample_image):
         target_image = cv2.resize(target_image, (28, 28), interpolation=cv2.INTER_CUBIC)
     # 予測結果を返す
     return ann.predict(np.array([target_image.ravel()], dtype=np.float32))
+

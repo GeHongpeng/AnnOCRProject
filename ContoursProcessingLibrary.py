@@ -221,3 +221,4 @@ def exclude_inadequacy_contours(img, contours):
                 rectangles.append(target_r)
     # 長方形配列を返す
     return rectangles
+
